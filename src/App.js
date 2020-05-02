@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Pie from './chart/Pie';
 
-function App() {
+const App = (props) => {
+  const dataset = [
+    { legend:"React", value:40, color:"#e74c3c" },
+    { legend:"Ember.js", value:10, color:"#f39c12" },
+    { legend:"Knockout.js", value:15, color:"#16a085" },
+    { legend:"Backbone.js", value:25, color:"#d35400" },
+    { legend:"AngularJS", value:30, color:"#2c3e50" }
+  ]
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+      <div className="App">
+          <Pie dataset={dataset}/>
+      </div>
+  ) 
 }
 
 export default App;
