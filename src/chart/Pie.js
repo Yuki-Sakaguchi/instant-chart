@@ -8,7 +8,7 @@ const Pie = (props) => {
   useEffect(() => {
     const svg = d3.select(ref.current)
     const pie = d3.pie().sort(null).value(d => d.value)
-    const arc = d3.arc().innerRadius(40)
+    const arc = d3.arc().innerRadius(80)
 
     const size = {
       width: 600,
@@ -33,7 +33,7 @@ const Pie = (props) => {
 
     g.append("text")
       .attr("dy", ".35em")
-      .attr("font-size", d => d.value / maxValue * 20)
+      .attr("font-size", d => d.value / maxValue * 30)
       .attr("fill", "white")
       .style("text-anchor", "middle")
       .text(d => d.data.legend)

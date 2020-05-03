@@ -1,17 +1,52 @@
 import React from 'react'
-import Pie from './chart/Pie';
+import Pie from './chart/Pie'
+import './App.css'
+
+const createParameterMap = () => {
+  const search = window.location.search
+  if (!search) {
+    return false
+  }
+  const list = [...search.slice(1).split("&")]
+  const map = {}
+  list.forEach((val) => {
+    const param = val.split("=")
+    map[param[0]] = param[1]
+  })
+  return map
+}
+
+const createDataset = (map) => {
+  const dataset = []
+  const values = map.v.split(',')
+  const legends = map.n.split(',')
+  const colors = map.c.split(',')
+  for (let i = 0; i < values.length; i++) {
+    dataset.push({
+      value: values[i],
+      legend: legends[i] ? legends[i] : null,
+      color: colors[i] ? '#' + colors[i] : null
+    })
+  }
+  return dataset
+}
 
 const App = (props) => {
-  const dataset = [
-    { legend:"React", value:40, color:"#e74c3c" },
-    { legend:"Ember.js", value:10, color:"#f39c12" },
-    { legend:"Knockout.js", value:15, color:"#16a085" },
-    { legend:"Backbone.js", value:25, color:"#d35400" },
-    { legend:"AngularJS", value:30, color:"#2c3e50" }
-  ]
+  const params = createParameterMap()
+
+  if (!params) {
+    return <p>クエリなし</p>
+  }
+
+  console.log(params)
+  console.log(createDataset(params))
+
+  const dataset = createDataset(params)
+  
   return (
       <div className="App">
-          <Pie dataset={dataset}/>
+        <h1>{decodeURI(params.t)}</h1>
+        <Pie dataset={dataset}/>
       </div>
   ) 
 }
